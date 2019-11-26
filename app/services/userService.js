@@ -35,7 +35,7 @@ const UserService = {
         const user = await User.findByPk(req.params.id);
         if (user) {
             try {
-                user.update({
+                await user.update({
                     ...req.body
                 });
                 res.json(user);
@@ -54,7 +54,7 @@ const UserService = {
         try {
             const user = await User.findByPk(req.params.id);
             if (user) {
-                user.destroy();
+                await user.destroy();
                 res.json(user);
             } else {
                 res.json({
