@@ -1,7 +1,7 @@
 const { User } = require('../models');
 
 const UserService = {
-    list: async (req, res) => {
+    list: async (_, res) => {
         try {
             const users = await User.findAll();
             res.json(users);
@@ -32,35 +32,23 @@ const UserService = {
         }
     },
     update: async (req, res) => {
-        const user = await User.findByPk(req.params.id);
-        if (user) {
-            try {
-                await user.update({
-                    ...req.body
-                });
-                res.json(user);
-            } catch (error) {
-                res.json({
-                    error
-                });
-            }
-        } else {
+        try {
+            const user = await User.findByPk(req.params.id);
+            await user.update({
+                ...req.body
+            });
+            res.json(user);
+        } catch (error) {
             res.json({
-                error: 'User does not exists'
+                error
             });
         }
     },
     destroy: async (req, res) => {
         try {
             const user = await User.findByPk(req.params.id);
-            if (user) {
-                await user.destroy();
-                res.json(user);
-            } else {
-                res.json({
-                    error: 'User does not exists'
-                });
-            }
+            await user.destroy();
+            res.json(user);
         } catch (error) {
             res.json({
                 error
