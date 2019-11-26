@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
+const { secret } = require('../../config');
 
 const AuthService = {
     login: async (req, res) => {
@@ -15,7 +16,7 @@ const AuthService = {
             if (user.email === email && user.password === password) {
                 const token = jwt.sign(
                     { email },
-                    'palavrasecreta',
+                    secret,
                     {
                         algorithm: 'HS256',
                         expiresIn: 3600
@@ -44,7 +45,7 @@ const AuthService = {
                 const token = req.headers.authorization;
 
                 if (token) {
-                    jwt.verify(token.split(' ')[1], 'palavrasecreta', (error, decoded) => {
+                    jwt.verify(token.split(' ')[1], secret, (error, decoded) => {
                         if (error) {
                             res.json({
                                 error

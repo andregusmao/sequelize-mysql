@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
+const { secret } = require('../../config');
 
 const GraphQLService = {
     login: async ({ email, password }) => {
@@ -13,7 +14,7 @@ const GraphQLService = {
             if (user.email === email && user.password === password) {
                 const token = jwt.sign(
                     { email },
-                    'palavrasecreta',
+                    secret,
                     {
                         algorithm: 'HS256',
                         expiresIn: 3600

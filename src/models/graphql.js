@@ -14,9 +14,9 @@ const GraphQL = buildSchema(`
     }
 
     input UserInput {
-        name: String!
-        email: String!
-        password: String!
+        name: String
+        email: String
+        password: String
     }
 
     type Query {
