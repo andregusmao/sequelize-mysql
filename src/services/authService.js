@@ -1,8 +1,5 @@
-const express = require('express');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/');
-
-const app = express();
 
 const AuthService = {
     login: async (req, res) => {
@@ -38,23 +35,33 @@ const AuthService = {
         }
     },
     verify: async (req, res, next) => {
-        const token = req.headers.authorization;
+        const { query } = req.body;
 
-        if (token) {
-            jwt.verify(token.split(' ')[1], 'palavrasecreta', (error, decoded) => {
-                if (error) {
-                    res.json({
-                        error
+        if (query === undefined) {
+            next();
+        } else {
+            if (query.indexOf('login') < 0 && query.indexOf('register') < 0) {
+                const token = req.headers.authorization;
+
+                if (token) {
+                    jwt.verify(token.split(' ')[1], 'palavrasecreta', (error, decoded) => {
+                        if (error) {
+                            res.json({
+                                error
+                            });
+                        } else {
+                            req.decoded = decoded;
+                            next();
+                        }
                     });
                 } else {
-                    req.decoded = decoded;
-                    next();
+                    res.json({
+                        error: 'Token does not provided'
+                    });
                 }
-            });
-        } else {
-            res.json({
-                error: 'Token does not provided'
-            });
+            } else {
+                next();
+            }
         }
     }
 };

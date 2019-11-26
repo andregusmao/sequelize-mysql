@@ -2,12 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { AuthController } = require('./app/controllers/authController');
-const { UserController } = require('./app/controllers/userController');
+const { AuthController } = require('./src/controllers/authController');
+const { UserController } = require('./src/controllers/userController');
 
-const AuthService = require('./app/services/authService');
+const AuthService = require('./src/services/authService');
 
-const ExpressGraphQL = require('./app/graphql/ExpressGraphQL');
+const ExpressGraphQL = require('./src/graphql/ExpressGraphQL');
 
 const app = express();
 

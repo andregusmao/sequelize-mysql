@@ -19,4 +19,7 @@ router.put('/users/:id', AuthService.verify, UserService.update);
 // Delete an user
 router.delete('/users/:id', AuthService.verify, UserService.destroy);
 
+// Register a new user
+router.post('/register', UserService.store);
+
 module.exports = { UserController: router };
