@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
-const Resolvers = {
+
+const GraphQLService = {
     login: async ({ email, password }) => {
         const user = await User.findOne({
             where: {
@@ -58,4 +59,4 @@ const Resolvers = {
     }
 };
 
-module.exports = Resolvers;
+module.exports = GraphQLService;

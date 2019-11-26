@@ -1,6 +1,6 @@
 const { buildSchema } = require("graphql");
 
-const Schema = buildSchema(`
+const GraphQL = buildSchema(`
     type Token {
         token: String
         error: String
@@ -38,4 +38,4 @@ const Schema = buildSchema(`
     }
 `);
 
-module.exports = Schema;
+module.exports = GraphQL;
