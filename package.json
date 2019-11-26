@@ -4,7 +4,8 @@
   "description": "Using Sequelize ORM with MySQL database",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,14 @@
   },
   "homepage": "https://github.com/andregusmao/sequelize-mysql#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.0.1",
     "sequelize": "^5.21.2"
   },
   "devDependencies": {
+    "nodemon": "^2.0.1",
     "sequelize-cli": "^5.5.1"
   }
 }
