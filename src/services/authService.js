@@ -13,7 +13,7 @@ const AuthService = {
         });
 
         if (user) {
-            if (user.email === email && user.password === password) {
+            if (user.password === password) {
                 const token = jwt.sign(
                     { email },
                     secret,
@@ -31,7 +31,7 @@ const AuthService = {
             }
         } else {
             res.json({
-                error: 'User does not exists'
+                error: 'Invalid username or password'
             });
         }
     },
