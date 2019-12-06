@@ -11,7 +11,7 @@ const GraphQLService = {
         });
 
         if (user) {
-            if (user.email === email && user.password === password) {
+            if (user.password === password) {
                 const token = jwt.sign(
                     { email },
                     secret,
@@ -20,25 +20,15 @@ const GraphQLService = {
                         expiresIn: 3600
                     });
                 return { token };
-            } else {
-                return { error: 'Invalid username or password' }
             }
-        } else {
-            return { error: 'User does not exists' }
         }
+
+        return { error: 'Invalid username or password' }
     },
-    users: async () => {
-        return await User.findAll();
-    },
-    user: async ({ id }) => {
-        return await User.findByPk(id);
-    },
-    register: async ({ userInput }) => {
-        return await User.create(userInput);
-    },
-    store: async ({ userInput }) => {
-        return await User.create(userInput);
-    },
+    users: async () => await User.findAll(),
+    user: async ({ id }) => await User.findByPk(id),
+    register: async ({ userInput }) => await User.create(userInput),
+    store: async ({ userInput }) => await User.create(userInput),
     update: async ({
         id,
         userInput
