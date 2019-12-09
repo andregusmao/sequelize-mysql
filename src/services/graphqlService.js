@@ -11,10 +11,10 @@ const GraphQLService = {
         });
 
         if (!user) {
-            return await User.create(userInput)
+            return await User.create(userInput);
         }
 
-        return { error: 'User already exists' }
+        return { error: 'User already exists' };
     },
     login: async ({ email, password }) => {
         const user = await User.findOne({
