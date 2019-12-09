@@ -3,6 +3,19 @@ const { User } = require('../models');
 const { secret } = require('../../config');
 
 const GraphQLService = {
+    register: async ({ userInput }) => {
+        const user = await User.findOne({
+            where: {
+                email
+            }
+        });
+
+        if (!user) {
+            return await User.create(userInput)
+        }
+
+        return { error: 'User already exists' }
+    },
     login: async ({ email, password }) => {
         const user = await User.findOne({
             where: {
@@ -27,21 +40,24 @@ const GraphQLService = {
     },
     users: async () => await User.findAll(),
     user: async ({ id }) => await User.findByPk(id),
-    register: async ({ userInput }) => await User.create(userInput),
     store: async ({ userInput }) => await User.create(userInput),
     update: async ({ id, userInput }) => {
         const user = await User.findByPk(id);
+
         if (user) {
             return await user.update(userInput)
         }
+
         return null;
     },
     destroy: async ({ id }) => {
         const user = await User.findByPk(id);
+
         if (user) {
             return await user.destroy();
         }
-        return null
+
+        return null;
     }
 };
 
